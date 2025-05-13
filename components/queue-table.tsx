@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Check } from "lucide-react";
+import "../styles/scrollbars.css";
 
 export function QueueTable() {
   const [queueData, setQueueData] = useState([
@@ -91,6 +92,42 @@ export function QueueTable() {
     },
   ]);
 
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const thumbRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    const thumb = thumbRef.current;
+
+    if (!container || !thumb) return;
+
+    const updateThumbPosition = () => {
+      const scrollPercentage =
+        container.scrollTop / (container.scrollHeight - container.clientHeight);
+      const thumbHeight = Math.max(
+        30,
+        (container.clientHeight / container.scrollHeight) *
+          container.clientHeight
+      );
+      const maxTop = container.clientHeight - thumbHeight - 32; // 32px für die beiden Buttons
+      const thumbTop = 16 + scrollPercentage * maxTop; // 16px für den oberen Button
+
+      thumb.style.top = `${thumbTop}px`;
+      thumb.style.height = `${thumbHeight}px`;
+    };
+
+    // Initial position
+    updateThumbPosition();
+
+    // Update on scroll
+    container.addEventListener("scroll", updateThumbPosition);
+
+    // Cleanup
+    return () => {
+      container.removeEventListener("scroll", updateThumbPosition);
+    };
+  }, []);
+
   const handleInputChange = (
     id: number,
     field: string,
@@ -105,53 +142,11 @@ export function QueueTable() {
 
   return (
     <div className="overflow-x-auto">
-      <div
-        className="h-[229px] overflow-y-scroll"
-        style={{
-          scrollbarWidth: "auto",
-          scrollbarColor: "#c0c0c0 #f0f0f0",
-        }}
-      >
-        <style jsx global>{`
-          /* Oldschool Windows Scrollbar Styling */
-          ::-webkit-scrollbar {
-            width: 16px;
-            height: 16px;
-          }
-
-          ::-webkit-scrollbar-track {
-            background: #f0f0f0;
-            border: 1px solid #a9a9a9;
-          }
-
-          ::-webkit-scrollbar-thumb {
-            background: #c0c0c0;
-            border: 1px solid #a9a9a9;
-            box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #707070;
-          }
-
-          ::-webkit-scrollbar-button {
-            display: block;
-            background: #c0c0c0;
-            height: 16px;
-            width: 16px;
-            border: 1px solid #a9a9a9;
-            box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #707070;
-          }
-
-          ::-webkit-scrollbar-button:vertical:start:decrement {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpolygon points='4,2.5 7,5.5 1,5.5' fill='%23000000'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: center;
-          }
-
-          ::-webkit-scrollbar-button:vertical:end:increment {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpolygon points='4,5.5 7,2.5 1,2.5' fill='%23000000'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: center;
-          }
-        `}</style>
-        <table className="w-full text-left">
+      <div ref={scrollContainerRef} className="windows-scrollbar">
+        <div className="windows-scrollbar-top-button"></div>
+        <div ref={thumbRef} className="windows-scrollbar-thumb"></div>
+        <div className="windows-scrollbar-bottom-button"></div>
+        <table className="w-full text-left pr-4">
           <thead className="sticky top-0 z-10">
             <tr className="bg-gray-300 border-t border-b border-gray-400">
               <th className="p-2 border-r border-gray-400 cursor-pointer hover:bg-gray-400">
