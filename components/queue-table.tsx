@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Check } from "lucide-react"
+import { useState } from "react";
+import { Check } from "lucide-react";
 
 export function QueueTable() {
-  const [queueData] = useState([
+  const [queueData, setQueueData] = useState([
     {
       id: 1,
       name: "Name",
@@ -47,14 +47,28 @@ export function QueueTable() {
       unavailable: "0",
       showAgents: true,
     },
-  ])
+  ]);
+
+  const handleInputChange = (
+    id: number,
+    field: string,
+    value: string | boolean
+  ) => {
+    setQueueData((prevData) =>
+      prevData.map((queue) =>
+        queue.id === id ? { ...queue, [field]: value } : queue
+      )
+    );
+  };
 
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-left">
         <thead>
           <tr className="bg-gray-300 border-t border-b border-gray-400">
-            <th className="p-2 border-r border-gray-400 cursor-pointer hover:bg-gray-400">Name</th>
+            <th className="p-2 border-r border-gray-400 cursor-pointer hover:bg-gray-400">
+              Name
+            </th>
             <th className="p-2 border-r border-gray-400">Status</th>
             <th className="p-2 border-r border-gray-400">Call in Queue</th>
             <th className="p-2 border-r border-gray-400">Waiting</th>
@@ -71,34 +85,131 @@ export function QueueTable() {
           {queueData.map((queue, index) => (
             <tr
               key={queue.id}
-              className={`${index % 2 === 0 ? "bg-[#B8D1E5]" : "bg-[#9BBDD9]"} border-b border-gray-400 hover:bg-blue-300`}
+              className={`${
+                index % 2 === 0 ? "bg-[#B8D1E5]" : "bg-[#9BBDD9]"
+              } border-b border-gray-400 hover:bg-blue-300`}
             >
               <td className="p-2 border-r border-gray-400 text-blue-700 underline cursor-pointer hover:text-blue-900">
-                {queue.name}
+                <input
+                  type="text"
+                  value={queue.name}
+                  onChange={(e) =>
+                    handleInputChange(queue.id, "name", e.target.value)
+                  }
+                  className="w-full bg-transparent text-blue-700 underline cursor-pointer hover:text-blue-900 focus:outline-none"
+                />
               </td>
-              <td className="p-2 border-r border-gray-400">{queue.status}</td>
-              <td className="p-2 border-r border-gray-400">{queue.callInQueue}</td>
-              <td className="p-2 border-r border-gray-400">{queue.waiting}</td>
-              <td className="p-2 border-r border-gray-400">{queue.ewt}</td>
-              <td className="p-2 border-r border-gray-400">{queue.aht}</td>
-              <td className="p-2 border-r border-gray-400">{queue.asa}</td>
-              <td className="p-2 border-r border-gray-400">{queue.staffed}</td>
-              <td className="p-2 border-r border-gray-400">{queue.idle}</td>
-              <td className="p-2 border-r border-gray-400">{queue.unavailable}</td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={queue.status}
+                  onChange={(e) =>
+                    handleInputChange(queue.id, "status", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={queue.callInQueue}
+                  onChange={(e) =>
+                    handleInputChange(queue.id, "callInQueue", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={queue.waiting}
+                  onChange={(e) =>
+                    handleInputChange(queue.id, "waiting", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={queue.ewt}
+                  onChange={(e) =>
+                    handleInputChange(queue.id, "ewt", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={queue.aht}
+                  onChange={(e) =>
+                    handleInputChange(queue.id, "aht", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={queue.asa}
+                  onChange={(e) =>
+                    handleInputChange(queue.id, "asa", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={queue.staffed}
+                  onChange={(e) =>
+                    handleInputChange(queue.id, "staffed", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={queue.idle}
+                  onChange={(e) =>
+                    handleInputChange(queue.id, "idle", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={queue.unavailable}
+                  onChange={(e) =>
+                    handleInputChange(queue.id, "unavailable", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
               <td className="p-2 text-center">
-                <Check className="inline-block h-5 w-5" />
+                <input
+                  type="checkbox"
+                  checked={queue.showAgents}
+                  onChange={(e) =>
+                    handleInputChange(queue.id, "showAgents", e.target.checked)
+                  }
+                  className="hidden"
+                  id={`show-agents-${queue.id}`}
+                />
+                <label
+                  htmlFor={`show-agents-${queue.id}`}
+                  className="cursor-pointer"
+                >
+                  <Check className="inline-block h-5 w-5" />
+                </label>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div className="p-2 bg-white border-t border-gray-400">
-        <input
-          type="text"
-          className="border border-gray-300 p-1 w-full"
-          placeholder="Under title area should be all typable"
-        />
-      </div>
     </div>
-  )
+  );
 }

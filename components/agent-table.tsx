@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 
 export function AgentTable() {
-  const [agentData] = useState([
+  const [agentData, setAgentData] = useState([
     {
       id: 1,
       status: "busy",
@@ -46,14 +46,24 @@ export function AgentTable() {
       avgBusyOut: "00:00",
       avgWrapUp: "00:00",
     },
-  ])
+  ]);
+
+  const handleInputChange = (id: number, field: string, value: string) => {
+    setAgentData((prevData) =>
+      prevData.map((agent) =>
+        agent.id === id ? { ...agent, [field]: value } : agent
+      )
+    );
+  };
 
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-left">
         <thead>
           <tr className="bg-gray-300 border-t border-b border-gray-400">
-            <th className="p-2 border-r border-gray-400 cursor-pointer hover:bg-gray-400">Status</th>
+            <th className="p-2 border-r border-gray-400 cursor-pointer hover:bg-gray-400">
+              Status
+            </th>
             <th className="p-2 border-r border-gray-400">Name</th>
             <th className="p-2 border-r border-gray-400">Queues(Total)</th>
             <th className="p-2 border-r border-gray-400">Sign-in Time</th>
@@ -70,29 +80,121 @@ export function AgentTable() {
           {agentData.map((agent, index) => (
             <tr
               key={agent.id}
-              className={`${index % 2 === 0 ? "bg-[#B8D1E5]" : "bg-[#9BBDD9]"} border-b border-gray-400 hover:bg-blue-300`}
+              className={`${
+                index % 2 === 0 ? "bg-[#B8D1E5]" : "bg-[#9BBDD9]"
+              } border-b border-gray-400 hover:bg-blue-300`}
             >
               <td className="p-2 border-r border-gray-400">
                 <div className="w-6 h-6 rounded-full bg-[#8B2332]"></div>
               </td>
               <td className="p-2 border-r border-gray-400 text-blue-700 underline cursor-pointer hover:text-blue-900">
-                {agent.name}
+                <input
+                  type="text"
+                  value={agent.name}
+                  onChange={(e) =>
+                    handleInputChange(agent.id, "name", e.target.value)
+                  }
+                  className="w-full bg-transparent text-blue-700 underline cursor-pointer hover:text-blue-900 focus:outline-none"
+                />
               </td>
               <td className="p-2 border-r border-gray-400 text-blue-700 underline cursor-pointer hover:text-blue-900">
-                {agent.queues}
+                <input
+                  type="text"
+                  value={agent.queues}
+                  onChange={(e) =>
+                    handleInputChange(agent.id, "queues", e.target.value)
+                  }
+                  className="w-full bg-transparent text-blue-700 underline cursor-pointer hover:text-blue-900 focus:outline-none"
+                />
               </td>
-              <td className="p-2 border-r border-gray-400">{agent.signInTime}</td>
-              <td className="p-2 border-r border-gray-400">{agent.duration}</td>
-              <td className="p-2 border-r border-gray-400">{agent.callState}</td>
-              <td className="p-2 border-r border-gray-400">{agent.agentState}</td>
-              <td className="p-2 border-r border-gray-400">{agent.percentAvailable}</td>
-              <td className="p-2 border-r border-gray-400">{agent.avgBusyIn}</td>
-              <td className="p-2 border-r border-gray-400">{agent.avgBusyOut}</td>
-              <td className="p-2">{agent.avgWrapUp}</td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={agent.signInTime}
+                  onChange={(e) =>
+                    handleInputChange(agent.id, "signInTime", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={agent.duration}
+                  onChange={(e) =>
+                    handleInputChange(agent.id, "duration", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={agent.callState}
+                  onChange={(e) =>
+                    handleInputChange(agent.id, "callState", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={agent.agentState}
+                  onChange={(e) =>
+                    handleInputChange(agent.id, "agentState", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={agent.percentAvailable}
+                  onChange={(e) =>
+                    handleInputChange(
+                      agent.id,
+                      "percentAvailable",
+                      e.target.value
+                    )
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={agent.avgBusyIn}
+                  onChange={(e) =>
+                    handleInputChange(agent.id, "avgBusyIn", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2 border-r border-gray-400">
+                <input
+                  type="text"
+                  value={agent.avgBusyOut}
+                  onChange={(e) =>
+                    handleInputChange(agent.id, "avgBusyOut", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
+              <td className="p-2">
+                <input
+                  type="text"
+                  value={agent.avgWrapUp}
+                  onChange={(e) =>
+                    handleInputChange(agent.id, "avgWrapUp", e.target.value)
+                  }
+                  className="w-full bg-transparent focus:outline-none"
+                />
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-  )
+  );
 }
