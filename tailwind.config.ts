@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   darkMode: ["class"],
@@ -9,8 +9,29 @@ const config: Config = {
     "*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
+      fontFamily: {
+        base: ["var(--font-base)"],
+      },
       colors: {
+        darkred: "#6c2d2d",
+        lightred: "#978283",
+        midblue: "#a4bdca",
+        darkblue: "#79abc1",
+        lightblue: "#b8c2c9",
+        textblue: "#123d95",
+        green: "#29b060",
+        red: "#be2525",
+        circlegray: "#b7b7b7",
+        gradient1: "#ced2d4",
+        gradient2: "#b7c2c9",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -61,13 +82,6 @@ const config: Config = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        maroon: {
-          DEFAULT: "#8B2332",
-        },
-        lightblue: {
-          DEFAULT: "#B8D1E5",
-          dark: "#9BBDD9",
-        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -98,6 +112,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
-}
-export default config
+  plugins: [require("tailwindcss-animate")],
+};
+export default config;

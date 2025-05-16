@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, sans-serif;
-}
-
-table {
-  border-collapse: collapse;
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -94,5 +86,16 @@ table {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .table-header-gradient {
+    background: linear-gradient(
+      to bottom,
+      theme("colors.gradient1") 0%,
+      theme("colors.gradient2") 50%,
+      theme("colors.gradient1") 100%
+    );
   }
 }
