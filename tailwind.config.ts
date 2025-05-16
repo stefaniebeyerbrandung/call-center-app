@@ -32,6 +32,7 @@ const config: Config = {
         circlegray: "#b7b7b7",
         gradient1: "#ced2d4",
         gradient2: "#b7c2c9",
+        scrollbar: "#e8e8e7",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
