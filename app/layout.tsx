@@ -3,9 +3,9 @@ import "./globals.css";
 import localFont from "next/font/local";
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.dev",
+  title: "Berliner Hilfetelefon für Frauen | Dashboard",
+  description:
+    "Das Berliner Hilfetelefon für Frauen ist ein Anlaufpunkt für alle Frauen, die in Berlin leben und sich in Not befinden. Wir bieten professionelle Beratung und Unterstützung in allen Themenbereichen.",
 };
 
 const base = localFont({
