@@ -289,7 +289,7 @@ export default function CallCenterDashboard() {
           {/* Top Section */}
           <div className="relative overflow-hidden">
             <div className="w-[calc(100%-24px)]">
-              <div className="grid grid-cols-4 bg-gray-300 px-2 py-1 border-b border-gray-400 text-sm">
+              <div className="grid grid-cols-4 bg-gray-300 py-1 border-b border-gray-400 text-sm">
                 <div className="table-header-gradient text-center font-bold text-md">
                   Warteschlangen
                 </div>
@@ -1323,7 +1323,7 @@ export default function CallCenterDashboard() {
           {/* Bottom Section */}
           <div className="relative mt-10 overflow-hidden">
             <div className="w-[calc(100%-24px)]">
-              <div className="grid grid-cols-4 bg-gray-300 px-2 py-1 border-b border-gray-400 text-sm">
+              <div className="grid grid-cols-4 bg-gray-300 py-1 border-b border-gray-400 text-sm">
                 <div className="table-header-gradient text-center font-bold text-md">
                   Beratende
                 </div>
