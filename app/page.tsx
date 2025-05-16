@@ -352,7 +352,7 @@ export default function CallCenterDashboard() {
                   >
                     <td className="px-2 py-1">
                       <div
-                        className="flex items-center cursor-pointer"
+                        className="flex items-center justify-center cursor-pointer"
                         onClick={() => toggleCallDetails("call149")}
                       >
                         <Link
@@ -593,7 +593,7 @@ export default function CallCenterDashboard() {
                   >
                     <td className="px-2 py-1">
                       <div
-                        className="flex items-center cursor-pointer"
+                        className="flex items-center justify-center cursor-pointer"
                         onClick={() => toggleCallDetails("call150")}
                       >
                         <Link
@@ -834,7 +834,7 @@ export default function CallCenterDashboard() {
                   >
                     <td className="px-2 py-1">
                       <div
-                        className="flex items-center cursor-pointer"
+                        className="flex items-center justify-center cursor-pointer"
                         onClick={() => toggleCallDetails("call151")}
                       >
                         <Link
@@ -1075,7 +1075,7 @@ export default function CallCenterDashboard() {
                   >
                     <td className="px-2 py-1">
                       <div
-                        className="flex items-center cursor-pointer"
+                        className="flex items-center justify-center cursor-pointer"
                         onClick={() => toggleCallDetails("call152")}
                       >
                         <Link
